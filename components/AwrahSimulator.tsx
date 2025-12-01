@@ -271,11 +271,33 @@ const BodySilhouette: React.FC<{
         </filter>
       </defs>
       
-      {/* TÊTE */}
-      <circle cx="100" cy="50" r="30" fill={getColor('head')} stroke="white" strokeWidth="2" />
-      
-      {/* COU (Lien tête-torse) */}
-      <rect x="90" y="75" width="20" height="15" fill={getColor('head')} />
+      {/* --- TÊTE & COU (Différenciation Homme/Femme) --- */}
+      {gender === Gender.Female ? (
+        <>
+          {/* HIJAB (Foulard) - Statique (Gris/Vêtement) */}
+          {/* Forme qui englobe la tête et le cou jusqu'aux épaules */}
+          <path 
+            d="M 60,90 Q 55,40 100,20 Q 145,40 140,90 Z" 
+            fill="#64748b" 
+            stroke="white" 
+            strokeWidth="2" 
+          />
+          {/* VISAGE - Dynamique (Vert/Rouge selon règle) */}
+          <ellipse 
+            cx="100" cy="55" rx="22" ry="26" 
+            fill={getColor('head')} 
+            stroke="white" 
+            strokeWidth="2" 
+          />
+        </>
+      ) : (
+        <>
+          {/* TÊTE HOMME STANDARD */}
+          <circle cx="100" cy="50" r="30" fill={getColor('head')} stroke="white" strokeWidth="2" />
+          {/* COU HOMME */}
+          <rect x="90" y="75" width="20" height="15" fill={getColor('head')} />
+        </>
+      )}
 
       {/* TORSE (Haut jusqu'au nombril approx) */}
       <path d="M60,90 Q100,90 140,90 L140,180 L60,180 Z" fill={getColor('torso')} stroke="white" strokeWidth="2" />
